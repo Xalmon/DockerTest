@@ -1,0 +1,10 @@
+---
+- hosts: local
+  tasks:
+    - name: Manage configuration files
+      copy:
+        src: "{{ item.src }}"
+        container: "{{ item.container }}"
+      loop:
+        - { src: "/mnt/c/Users/DELL/Desktop/DockerTest/config/file1", container: "mongodb" }
+        - { src: "/mnt/c/Users/DELL/Desktop/DockerTest/config/file2", container: "rabbitmq" }
