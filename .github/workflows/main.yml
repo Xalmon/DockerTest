@@ -14,13 +14,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Write numerical value
+      - name: Write numerical value to README.md
         run: |
-          echo "$(date +'%s')" > value.txt  # Write current timestamp as numerical value to value.txt
+          echo "Numerical value: $(date +'%s')" >> README.md  # Append current timestamp as numerical value to README.md
 
-      - name: Display value
+      - name: Display README.md
         run: |
-          cat value.txt  # Display the value for debugging purposes
+          cat README.md  # Display the README.md file for debugging purposes
 
       - name: Commit and Push changes
         env:
@@ -28,10 +28,10 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'actions@github.com'
-          git add value.txt
-          git commit -m "Update numerical value at $(date)"
+          git add README.md
+          git commit -m "Update README with numerical value at $(date)"
           git push origin main
 
-      - name: Delete numerical value
+      - name: Remove numerical value from README.md
         run: |
-          rm -f value.txt  # Delete the value.txt file
+          sed -i '/Numerical value:/d' README.md  # Remove lines containing 'Numerical value:' from README.md
