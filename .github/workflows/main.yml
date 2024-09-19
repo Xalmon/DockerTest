@@ -1,0 +1,27 @@
+name: Write and Delete Numerical Value
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'  # Runs every 10 minutes
+
+permissions:
+  contents: write
+
+jobs:
+  write-and-delete:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Write numerical value
+        run: |
+          echo "$(date +'%s')" > value.txt  # Write current timestamp as numerical value to value.txt
+
+      - name: Display value
+        run: |
+          cat value.txt  # Display the value for debugging purposes
+
+      - name: Delete numerical value
+        run: |
+          rm -f value.txt  # Delete the value.txt file
