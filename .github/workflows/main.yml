@@ -2,7 +2,7 @@ name: Write and Delete Numerical Value
 
 on:
   schedule:
-    - cron: '*0 0 * * *' 
+    - cron: '0 0 * * *' 
 
 permissions:
   contents: write  # Required permission to write to the repository
