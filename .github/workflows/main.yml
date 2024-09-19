@@ -5,7 +5,7 @@ on:
     - cron: '*/10 * * * *'  # Runs every 10 minutes
 
 permissions:
-  contents: write
+  contents: write  # Required permission to write to the repository
 
 jobs:
   write-and-delete:
@@ -21,6 +21,16 @@ jobs:
       - name: Display value
         run: |
           cat value.txt  # Display the value for debugging purposes
+
+      - name: Commit and Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'actions@github.com'
+          git add value.txt
+          git commit -m "Update numerical value at $(date)"
+          git push origin main
 
       - name: Delete numerical value
         run: |
